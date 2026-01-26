@@ -20,12 +20,12 @@ from django.shortcuts import render, redirect
 from django.urls import path
 
 game_list = [
-    {'title' : '33원정대', 'grade' : 1},
-    {'title' : '킹덤컴', 'grade' : 2},
-    {'title' : '데스 스트랜딩2', 'grade' : 3},
-    {'title' : '하데스2', 'grade' : 4},
-    {'title' : '고스트 오브 요테이', 'grade' : 5},
-    {'title' : '할로우 나이트 실크송', 'grade' : 6}
+    {'title' : '33원정대', 'rank' : 1},
+    {'title' : '킹덤컴', 'rank' : 2},
+    {'title' : '데스 스트랜딩2', 'rank' : 3},
+    {'title' : '하데스2', 'rank' : 4},
+    {'title' : '고스트 오브 요테이', 'rank' : 5},
+    {'title' : '할로우 나이트 실크송', 'rank' : 6}
 ]
 
 def index(request):
