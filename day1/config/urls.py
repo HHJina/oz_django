@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import path
 
 game_list = [
@@ -67,12 +67,18 @@ def game_detail(request, index):
     return render(request, 'game.html', context)
 
 def gugu(request,num):
+    if num < 2:
+        return redirect('/gugu/2')
+
     gugu_list = []
     for i in range(1,11):
         result = num * i
         gugu_list.append(result)
 
-    context = {'gugu_list':gugu_list, 'num':num, 'range':range(0,10)}
+    context = {
+        'gugu_list':gugu_list,
+        'num':num,
+        'range':range(0,10)}
     return render(request,'gugu.html',context)
 urlpatterns = [
     path('admin/', admin.site.urls),
