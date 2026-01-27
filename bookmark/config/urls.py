@@ -19,9 +19,11 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import path
 
+from bookmark import views
+
 game_list = [
     {'title' : '33원정대', 'rank' : 1},
-    {'title' : '킹덤컴', 'rank' : 2},
+    {'title' : '킹덤컴2', 'rank' : 2},
     {'title' : '데스 스트랜딩2', 'rank' : 3},
     {'title' : '하데스2', 'rank' : 4},
     {'title' : '고스트 오브 요테이', 'rank' : 5},
@@ -82,11 +84,13 @@ def gugu(request,num):
     return render(request,'gugu.html',context)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    path('book_list/',book_list),
-    path('book_list/<int:num>',book),
-    path('language/<str:lang>',language),
-    path('game/',games),
-    path('game/<int:index>',game_detail),
-    path('gugu/<int:num>',gugu),
+    # path('',index),
+    # path('book_list/',book_list),
+    # path('book_list/<int:num>',book),
+    # path('language/<str:lang>',language),
+    # path('game/',games),
+    # path('game/<int:index>',game_detail),
+    # path('gugu/<int:num>',gugu),
+    path('bookmark/', views.bookmark_list),
+    path('bookmark/<int:pk>/', views.bookmark_detail),
 ]
