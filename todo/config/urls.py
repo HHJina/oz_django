@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', views.todo_list, name='todo_list'),
     path('todo/<int:todo_id>/', views.todo_info, name='todo_info'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')), # django 기본 로그인 기능
     path('signup/', user_views.signup, name='signup'),
-    path('login/', user_views.login, name='login'),
+    path('login/', user_views.login, name='login'), # 직접 만든 로그인 기증
 ]
