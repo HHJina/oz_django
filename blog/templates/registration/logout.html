@@ -1,0 +1,38 @@
+{# templates/blog_list.html #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {# 로그인 및 유저 정보를 우측 최상단으로 이동 #}
+    <nav>
+        <div style="text-align: right">
+            {% if request.user.is_authenticated %} {# if문을 사용해서 로그인 되었을 때만 로그아웃 버튼 활성화 #}
+            {#  로그아웃은 Post 요청입니다. form을 활용합니다. #}
+                <form action="{%  url 'logout' %}" method="POST" style="display: inline">
+                    {% csrf_token %}
+                    <button>로그아웃</button>
+                </form>
+                {{ request.user.username }}
+            {% else %}
+	            <a href="{%  url 'login' %}">로그인</a>
+            {% endif %}
+        </div>
+    </nav>
+    <body>
+    <h1>블로그 목록</h1>
+
+    {% for blog in blogs %}
+        <p>
+		        # 위치인자로 들어가기 때문에 blog.id 등으로 작성해도 무관합니다.
+		        # 첫번째 인자로 들어온 숫자를 url에 연결해줍니다.
+            <a href="{% url 'blog_detail' blog.pk %}">
+                {{ blog.title }} - <small>{{ blog.created_at | date:"Y-m-d"}}</small>
+            </a>
+        </p>
+    {% endfor %}
+</body>
+</html>
