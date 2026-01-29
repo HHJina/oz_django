@@ -127,7 +127,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # login
-LOGIN_REDIRECT_URL = '/blog'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 # logout
-LOGOUT_REDIRECT_URL = '/blog'
+LOGOUT_REDIRECT_URL = '/'

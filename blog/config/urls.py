@@ -17,13 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blog.views import blog_list, blog_detail
+from blog.views import blog_list, blog_detail, blog_create, blog_update, blog_delete
 from member.views import signup, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', blog_list, name='blog_list'),
-    path('blog/<int:pk>/', blog_detail, name = 'blog_detail'),
+    path('', blog_list, name='blog_list'),
+    path('<int:pk>/', blog_detail, name = 'blog_detail'),
+    path('create/',blog_create, name = 'blog_create'),
+    path('<int:pk>/update/',blog_update, name = 'blog_update'),
+    path('<int:pk>/delete/', blog_delete, name='blog_delete'),
+
+
+    # auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', signup, name='signup'),
     path('login/', login, name='login'),
