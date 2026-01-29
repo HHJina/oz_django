@@ -44,7 +44,9 @@ OWN_APPS = [
     'users',
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'django_extensions'
+]
 
 INSTALLED_APPS = DJANGO_APPS + OWN_APPS + THIRD_PARTY_APPS
 
@@ -126,7 +128,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # login
-LOGIN_REDIRECT_URL = '/todo'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 # logout
 LOGOUT_REDIRECT_URL = '/accounts/login'
