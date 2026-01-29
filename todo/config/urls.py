@@ -23,8 +23,13 @@ from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('todo/', views.todo_list, name='todo_list'),
-    path('todo/<int:todo_id>/', views.todo_info, name='todo_info'),
+    path('', views.todo_list, name='todo_list'),
+    path('<int:todo_id>/', views.todo_info, name='todo_info'),
+    path('create/', views.todo_create, name='todo_create'),
+    path('<int:todo_id>/update/', views.todo_update, name="todo_update"),
+    path('<int:todo_id>/delete/', views.todo_delete, name="todo_delete"),
+
+    # user
     path('accounts/', include('django.contrib.auth.urls')), # django 기본 로그인 기능
     path('signup/', user_views.signup, name='signup'),
     path('login/', user_views.login, name='login'), # 직접 만든 로그인 기증
