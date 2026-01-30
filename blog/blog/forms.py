@@ -5,4 +5,4 @@ from .models import Blog
 class BlogForm(forms.ModelForm): # Model을 가지고 만들어서 ModelForm 상속
     class Meta:
         model = Blog
-        fields = ('title', 'content', )
+        fields = ('category','title', 'content', )

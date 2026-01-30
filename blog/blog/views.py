@@ -11,6 +11,7 @@ from .forms import BlogForm
 from .models import Blog
 
 
+# 내가 직접 만드는 DIY
 def blog_list(request):
     blogs = Blog.objects.all().order_by('-created_at')
 
@@ -21,7 +22,6 @@ def blog_list(request):
             Q(title__icontains=q) |
             Q(content__icontains=q)
         )
-        # blogs = blogs.filter(title__icontains=q)
 
     # 페이지네이션
     paginator = Paginator(blogs,10)
@@ -35,9 +35,9 @@ def blog_list(request):
     request.session['count'] = request.session.get('count', 0) + 1
 
     context = {
-        # 'blogs': blogs,
+        'object_list': page_object.object_list,
         'count': request.session['count'],
-        'page_object': page_object,
+        'page_obj': page_object,
     }
 
     print(f"-------{page_object}")
@@ -63,7 +63,7 @@ def blog_create(request):
             blog = form.save(commit=False)
             blog.author = request.user
             blog.save()
-            return redirect(reverse('blog_detail',kwargs={'pk':blog.id}))
+            return redirect(reverse('fb:detail',kwargs={'pk':blog.id}))
     else:
         form = BlogForm()
 
@@ -80,7 +80,7 @@ def blog_update(request, pk):
     form = BlogForm(request.POST or None, instance=blog)
     if form.is_valid():
         form.save()
-        return redirect(reverse('blog_detail',kwargs={'pk':blog.id}))
+        return redirect(reverse('fb:detail',kwargs={'pk':blog.id}))
 
     context = {
         'blog': blog,
@@ -98,4 +98,4 @@ def blog_delete(request, pk):
     blog = get_object_or_404(Blog, pk=pk, author=request.user)
     blog.delete()
 
-    return redirect(reverse('blog_list'))
+    return redirect(reverse('fb:list'))
