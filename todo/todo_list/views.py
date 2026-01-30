@@ -65,7 +65,7 @@ def todo_create(request):
         todo = form.save(commit=False)
         todo.user = request.user
         todo.save()
-        return redirect(reverse('todo_info', kwargs={'todo_id': todo.id}))
+        return redirect(reverse('todo:info', kwargs={'todo_id': todo.id}))
     else:
         form = TodoForm()
 
@@ -79,7 +79,7 @@ def todo_update(request, todo_id):
     form = TodoUpdateForm(request.POST or None, instance=todo)
     if form.is_valid():
         form.save()
-        return redirect(reverse('todo_info', kwargs={'todo_id': todo.id}))
+        return redirect(reverse('todo:info', kwargs={'todo_id': todo.id}))
     context = {
         'form': form
     }
@@ -88,4 +88,4 @@ def todo_update(request, todo_id):
 def todo_delete(request, todo_id):
     todo = get_object_or_404(TodoList, id=todo_id, user=request.user)
     todo.delete()
-    return redirect(reverse('todo_list'))
+    return redirect(reverse('todo:list'))
