@@ -23,11 +23,16 @@ from users import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.todo_list, name='todo_list'),
-    path('<int:todo_id>/', views.todo_info, name='todo_info'),
-    path('create/', views.todo_create, name='todo_create'),
-    path('<int:todo_id>/update/', views.todo_update, name="todo_update"),
-    path('<int:todo_id>/delete/', views.todo_delete, name="todo_delete"),
+    # path('', views.todo_list, name='todo_list'),
+    # path('<int:todo_id>/', views.todo_info, name='todo_info'),
+    # path('create/', views.todo_create, name='todo_create'),
+    # path('<int:todo_id>/update/', views.todo_update, name="todo_update"),
+    # path('<int:todo_id>/delete/', views.todo_delete, name="todo_delete"),
+
+    # FBV URL include
+    path('fb/', include('todo_list.fb_urls')),
+    # CBV URL include
+    path('', include('todo_list.cb_urls')),
 
     # user
     path('accounts/', include('django.contrib.auth.urls')), # django 기본 로그인 기능
