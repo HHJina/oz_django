@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import TodoList
+from .models import TodoList, Comment
+
 
 # 모델폼을 자동으로 읽어서 입력창을 자동으로 그려줌
 class TodoForm(forms.ModelForm):
@@ -18,3 +19,9 @@ class TodoUpdateForm(forms.ModelForm):
     class Meta:
         model = TodoList
         fields = ('title', 'description', 'is_completed')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('message',)
+

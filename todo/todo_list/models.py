@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class TodoList(models.Model):
+from utils.models import TimestampModel
+
+
+class TodoList(TimestampModel):
     title = models.CharField(max_length=100)
     description = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField()
     is_completed = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    modify_at = models.DateTimeField(auto_now=True)
 
     # 사용자 추가
     # models.CASCADE => 같이 삭제
@@ -18,3 +19,16 @@ class TodoList(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(TimestampModel):
+    # blog
+    # 댓글 내용
+    # 작성자
+    # 작성일자
+    # 수정일자
+    todo = models.ForeignKey(TodoList, on_delete=models.CASCADE, related_name='comments')
+    message = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+
+    def __str__(self):
+        return f'{self.user}: {self.message}'
