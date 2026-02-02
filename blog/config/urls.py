@@ -46,9 +46,8 @@ urlpatterns = [
     path('login/', login, name='login'),
 
     # CBV
-    path('about', AboutView.as_view(), name='about'),
+    path('about/', AboutView.as_view(), name='about'),
     path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
-    path('test/', TestView.as_view(), name='test'),
     # path('redirect2/', lambda req: redirect('about')),
 
 ]

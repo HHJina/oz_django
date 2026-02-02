@@ -70,7 +70,7 @@ def blog_create(request):
     context = {
         'form': form,
     }
-    return render(request, 'blog_create.html', context)
+    return render(request, 'blog_form.html', context)
 
 def blog_update(request, pk):
     blog = get_object_or_404(Blog, pk=pk, author=request.user)
@@ -87,7 +87,7 @@ def blog_update(request, pk):
         'form': form,
     }
 
-    return render(request, 'blog_update.html', context)
+    return render(request, 'blog_form.html', context)
 
 
 # POST이외의 요청은 거절하기
