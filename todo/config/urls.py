@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
@@ -38,4 +40,10 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')), # django 기본 로그인 기능
     path('signup/', user_views.signup, name='signup'),
     path('login/', user_views.login, name='login'), # 직접 만든 로그인 기증
+
+    # summernote
+    path('summernote/', include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

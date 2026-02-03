@@ -147,12 +147,6 @@ LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL = '/'
 
 
-# summer note
-
-## settings.py
-
-...
-
 # summernote
 SUMMERNOTE_CONFIG = {
     # Or, you can set it to `False` to use SummernoteInplaceWidget by default - no iframe mode
