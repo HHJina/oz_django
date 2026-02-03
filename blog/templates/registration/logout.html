@@ -22,13 +22,12 @@
             {% endif %}
         </div>
     </nav>
-    <body>
     <h1>블로그 목록</h1>
 
     {% for blog in blogs %}
         <p>
-		        # 위치인자로 들어가기 때문에 blog.id 등으로 작성해도 무관합니다.
-		        # 첫번째 인자로 들어온 숫자를 url에 연결해줍니다.
+                # 위치인자로 들어가기 때문에 blog.id 등으로 작성해도 무관합니다.
+                # 첫번째 인자로 들어온 숫자를 url에 연결해줍니다.
             <a href="{% url 'blog_detail' blog.pk %}">
                 {{ blog.title }} - <small>{{ blog.created_at | date:"Y-m-d"}}</small>
             </a>

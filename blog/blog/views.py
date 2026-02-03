@@ -73,12 +73,18 @@ def blog_create(request):
     return render(request, 'blog_form.html', context)
 
 def blog_update(request, pk):
-    blog = get_object_or_404(Blog, pk=pk, author=request.user)
+    if not request.user.is_superuser:
+        blog = get_object_or_404(Blog, pk=pk, author=request.user)
+    else:
+        blog = get_object_or_404(Blog, pk=pk)
+
     # if request.user != blog.author:
     #     raise Http404
 
-    form = BlogForm(request.POST or None, instance=blog)
+    form = BlogForm(request.POST or None, request.FILES or None ,instance=blog)
     if form.is_valid():
+        print(form.cleaned_data)
+
         form.save()
         return redirect(reverse('fb:detail',kwargs={'pk':blog.id}))
 

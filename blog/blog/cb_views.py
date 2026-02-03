@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Blog, Comment
-from .forms import CommentForm
+from .forms import CommentForm, BlogForm
 
 
 # 밀키트(레시피 따라가기)
@@ -81,8 +81,10 @@ class BlogDetailView(ListView):
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     template_name = 'blog_form.html'
-    fields = ('category','title', 'content')
+    # fields = ('category','title', 'content')
+    form_class = BlogForm
     # success_url = reverse_lazy('cb_blog_detail') # 일반 reverse는 무한
+
     # 작성자 넣어주기
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -103,7 +105,8 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     template_name = 'blog_form.html'
-    fields = ('category','title', 'content')
+    # fields = ('category','title', 'content')
+    form_class = BlogForm
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -111,6 +114,10 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
         if self.request.user.is_superuser:
             return queryset
         return queryset.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

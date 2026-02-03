@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.shortcuts import redirect, render
 from django.urls import path, include
@@ -37,17 +39,24 @@ class TestView(View): # Django의 View 클래스 상속
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # FBV
     path('fb/', include('blog.fbv_urls')), # function based view include
+
+    # CBV
     path('', include('blog.urls')), # class based view include
+    path('about/', AboutView.as_view(), name='about'),
+    path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
+    # path('redirect2/', lambda req: redirect('about')),
 
     # auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', signup, name='signup'),
     path('login/', login, name='login'),
 
-    # CBV
-    path('about/', AboutView.as_view(), name='about'),
-    path('redirect/', RedirectView.as_view(pattern_name='about'), name='redirect'),
-    # path('redirect2/', lambda req: redirect('about')),
-
+    # summernote
+    path('summernote/', include('django_summernote.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
