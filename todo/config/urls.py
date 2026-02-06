@@ -38,8 +38,9 @@ urlpatterns = [
 
     # user
     path('accounts/', include('django.contrib.auth.urls')), # django 기본 로그인 기능
-    path('signup/', user_views.signup, name='signup'),
-    path('login/', user_views.login, name='login'), # 직접 만든 로그인 기증
+    # path('signup/', user_views.signup, name='signup'),
+    # path('login/', user_views.login, name='login'), # 직접 만든 로그인 기증
+    path('users/',  include('users.urls')),
 
     # summernote
     path('summernote/', include('django_summernote.urls')),
